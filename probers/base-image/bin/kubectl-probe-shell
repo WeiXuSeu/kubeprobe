@@ -11,15 +11,17 @@ fi
 SCRIPT=$1
 SCRIPT_PARAM=$(echo $@ | sed -e 's/[^ ]* //')
 
-bash /tmp/$SCRIPT_FILE_NAME $SCRIPT_PARAM > /tmp/.probe_shell_result
+bash $@ > /tmp/.probe_shell_result
 
-for item in $(cat /tmp/.probe_shell_result)
+cat /tmp/.probe_shell_result|while read item;
 do
     name=$(echo "$item"| awk '{print $1}')
     status=$(echo "$item"| awk '{print $2}')
     if [[ "$status" == "ok" ]]; then
       status="info"
     fi
-    message=$(echo "$item"| awk -F " " '{for (i=3;i<=NF;i++)printf("%s ", $i);print ""}')
-    report-status --name=$name --status=$type --message="$message"
+    status=$(echo "$status"|tr 'a-z' 'A-Z')
+    raw=$(echo "$item"| awk -F " " '{for (i=3;i<=NF;i++)printf("%s ", $i);print ""}')
+    message=${raw:-" "}
+    report-status --name=$name --status=$status --message="$message"
 done
