@@ -22,12 +22,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/erda-project/kubeprober/pkg/probe-master/k8sclient"
-
-	kubeproberv1 "github.com/erda-project/kubeprober/apis/v1"
-	"github.com/erda-project/kubeprober/apistructs"
-	"github.com/erda-project/kubeprober/pkg/probe-master/alert/dingding"
-	_ "github.com/erda-project/kubeprober/pkg/probe-master/k8sclient"
 	"github.com/gorilla/mux"
 	"github.com/rancher/remotedialer"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -35,6 +29,12 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/klog"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+
+	kubeproberv1 "github.com/erda-project/kubeprober/apis/v1"
+	"github.com/erda-project/kubeprober/apistructs"
+	"github.com/erda-project/kubeprober/pkg/probe-master/alert/dingding"
+	"github.com/erda-project/kubeprober/pkg/probe-master/k8sclient"
+	_ "github.com/erda-project/kubeprober/pkg/probe-master/k8sclient"
 )
 
 const DINGDING_ALERT_NAME = "dingding"

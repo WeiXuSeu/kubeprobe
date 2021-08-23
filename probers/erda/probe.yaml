@@ -1,0 +1,31 @@
+apiVersion: kubeprober.erda.cloud/v1
+kind: Probe
+metadata:
+  name: erda
+  namespace: kubeprober
+spec:
+  template:
+    containers:
+      - name: erda
+        image: kubeprober/erda:v0.0.3
+        resources:
+          requests:
+            cpu: 10m
+            memory: 50Mi
+    restartPolicy: Never
+  configs:
+    - name: control-plane
+      env:
+        - name: LOGIN_USER
+          value: "support"
+        - name: LOGIN_PASSWORD
+          value: "xxx"
+        - name: SERVICE_NAMESPACE
+          value: "project-387-dev"
+        - name: CLUSTER_NAME
+          value: "terminus-dev"
+
+
+
+
+
