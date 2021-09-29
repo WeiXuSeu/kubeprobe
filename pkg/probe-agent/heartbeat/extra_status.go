@@ -30,8 +30,8 @@ import (
 )
 
 const (
-	addonInfoCm = "dice-addons-info"
-	toolsInfoCm = "dice-tools-info"
+	addonInfoCm       = "dice-addons-info"
+	toolsInfoCm       = "dice-tools-info"
 	getNetdataInfoCmd = "df -h \"/netdata\" | awk -v mp=\"/netdata\" '{if($NF==mp)print $3}'"
 )
 

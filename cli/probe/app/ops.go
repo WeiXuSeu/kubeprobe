@@ -16,12 +16,14 @@ package app
 import (
 	"context"
 	"fmt"
-	kubeproberv1 "github.com/erda-project/kubeprober/apis/v1"
+
 	"github.com/gosuri/uitable"
 	"github.com/spf13/cobra"
 	appv1 "k8s.io/api/apps/v1"
 	_ "k8s.io/client-go/plugin/pkg/client/auth"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+
+	kubeproberv1 "github.com/erda-project/kubeprober/apis/v1"
 )
 
 var OpsCmd = &cobra.Command{

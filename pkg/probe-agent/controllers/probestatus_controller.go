@@ -264,8 +264,13 @@ func mergeProbeStatus(r kubeproberv1.ReportProbeStatusSpec, s kubeproberv1.Probe
 	var existCheckerList []string
 	// check whether need to update probe status
 	update := true
-	for _, i := range s.Spec.Checkers {
-		existCheckerList = append(existCheckerList, i.Name)
+	for i, v := range s.Spec.Checkers {
+		// remove old checker status
+		if v.LastRun != nil && time.Now().Sub(v.LastRun.Time) > 24*time.Hour {
+			s.Spec.Checkers = append(s.Spec.Checkers[:i], s.Spec.Checkers[i+1:]...)
+			continue
+		}
+		existCheckerList = append(existCheckerList, v.Name)
 	}
 	for _, i := range r.Checkers {
 		index, flag := IsContain(existCheckerList, i.Name)
